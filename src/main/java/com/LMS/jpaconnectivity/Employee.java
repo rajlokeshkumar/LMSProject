@@ -8,12 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="Employee")
 public class Employee extends BaseJpadao implements Serializable {
 	/**
 		 * 
 		 */
-	
 	  @Id
 	  @Column(name = "id")
 	  private int id;
