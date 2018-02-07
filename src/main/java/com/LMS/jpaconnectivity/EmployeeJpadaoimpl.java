@@ -11,7 +11,7 @@ public Employee selectemp() {
 	Employee result=null;
 	try {
 		
-		   EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "LMSProject" );
+		   EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("LMSProject" );
 		      
 		      EntityManager entitymanager = emfactory.createEntityManager( );
 		      entitymanager.getTransaction( ).begin( );
