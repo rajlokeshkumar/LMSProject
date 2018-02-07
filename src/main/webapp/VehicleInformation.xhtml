@@ -22,10 +22,11 @@
 </h:head>
 
 <body>
-<h1>Register Trip</h1>
+<h1>Vehicle Information</h1>
+	<h:form>
 	<h:panelGrid columns="1" border="0">
 		<h:panelGroup id="view" layout="block" styleClass="fornewline">
-			<h:form>
+		
 				<h:panelGrid  columns="2" border="0">
 				<label>RegistrationNumber</label>
 				<h:inputText value="#{heyBuddy.vehicle.registrationNumber}"
@@ -77,7 +78,7 @@
 				
 		
 
-			</h:form>
+		
 		</h:panelGroup>
 		<h:panelGroup layout="block" style=" margin-left: 560px;" >
 		<h:commandButton styleClass="myButton" value="click  me" action="#{heyBuddy.performtheAction()}">
@@ -85,6 +86,7 @@
 				</h:commandButton>
 		</h:panelGroup>
 	</h:panelGrid>
+		</h:form>
 </body>
 
 </html>
