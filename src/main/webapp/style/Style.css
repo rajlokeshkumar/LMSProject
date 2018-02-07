@@ -6,19 +6,54 @@ body {
 	margin-left: 60px
 }
 .fornewline {
-    margin-left: 100px;
+    margin-left: 450px;
+}
+h1{
+	text-align: center;
+}
+ label{
+	color: #B4886B;
+font-weight: bold;
+display: block;
+width: 150px;
+
+padding-top:1px;
+text-align:center;
+float: left;
+} 
+
+.space5{
+	height: 5px;
+}
+.space10{
+	height: 10px;
+}
+.space15{
+	height: 15px;
+}
+.space5{
+	height: 20px;
 }
 
 input[type=text], select {
-    width: 120px;
-    padding: 6px 8px;
-    margin: 8px 0;
+    width: 200px;
+    padding: 4px 6px;
+    margin: 2px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
-
+.dateTextBoxstyleClass{
+	
+    width: 200px;
+    padding: 4px 6px;
+    margin: 2px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+	}
 .myButton {
 		-moz-box-shadow:inset 0px 1px 0px 0px #9acc85;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #9acc85;

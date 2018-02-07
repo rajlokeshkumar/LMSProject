@@ -7,57 +7,59 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
+import com.LMS.DTO.Vehicle;
 import com.LMS.jpaconnectivity.EmployeeJpadaoimpl;
 
 @ViewScoped
 @ManagedBean
 public class HeyBuddy implements PhaseListener {
 
-private String name;
+	/**
+		 * 
+		 */
+	private static final long serialVersionUID = 1L;
 
-private String name1;
-
-
-
-public String getName1() {
-	return name1;
-}
-
-public void setName1(String name1) {
-	this.name1 = name1;
-}
-
-public HeyBuddy() {
+	private Vehicle vehicle;
 	
-}
 
-public String getName() {
-	return name;
-}
+	public Vehicle getVehicle() {
+		if(this.vehicle==null) {
+			this.vehicle=new Vehicle();
+		}
+		return vehicle;
+	}
 
-public void setName(String name) {
-	this.name = name;
-}
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
 
-public void performtheAction() {
-	System.out.println(this.getName());
-}
-@Override
-public void afterPhase(PhaseEvent event) {
-System.out.println(event.getPhaseId());
+
+	public HeyBuddy() {
+
+	}
+
 	
-}
-@Override
-public void beforePhase(PhaseEvent event) {
-	System.out.println(event.getPhaseId());
-	
-}
-@Override
-public PhaseId getPhaseId() {
-	// TODO Auto-generated method stub
-	return null;
-}
 
+	public void performtheAction() {
+		
+	}
 
+	@Override
+	public void afterPhase(PhaseEvent event) {
+		System.out.println(event.getPhaseId());
+
+	}
+
+	@Override
+	public void beforePhase(PhaseEvent event) {
+		System.out.println(event.getPhaseId());
+
+	}
+
+	@Override
+	public PhaseId getPhaseId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

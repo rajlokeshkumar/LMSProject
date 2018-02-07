@@ -6,33 +6,84 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>JSF Tutorial</title>
-<link type="text/css" rel="stylesheet" href="../../style/Style.css">
-</link>
+	<title>Vehicle Info</title>
+	<link type="text/css" rel="stylesheet" href="../../style/Style.css">
+	</link>
+	
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"></link>
+  <link rel="stylesheet" href="/resources/demos/style.css"></link>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>	
 </h:head>
 
 <body>
-<h:panelGrid columns="2" border="0" >
-	<h:panelGroup id="view"  layout="block" >
-		<h:form >
-		<label>Name</label>
-			<h:inputText value="#{heyBuddy.name}" id="test">
-				<!--  <f:ajax onevent="focus" listener="#{heyBuddy.performtheAction()}" render="inputName" /> -->
-			</h:inputText>
-				<label>Name1</label>
-			<h:inputText value="#{heyBuddy.name}" id="test1" />
-			<br/>
-			<h:commandButton  styleClass="myButton fornewline" value="click  me">
+<h1>Register Trip</h1>
+	<h:panelGrid columns="1" border="0">
+		<h:panelGroup id="view" layout="block" styleClass="fornewline">
+			<h:form>
+				<h:panelGrid  columns="2" border="0">
+				<label>RegistrationNumber</label>
+				<h:inputText value="#{heyBuddy.vehicle.registrationNumber}"
+					id="registrationNumber">
+					<!--  <f:ajax onevent="focus" listener="#{heyBuddy.performtheAction()}" render="inputName" /> -->
+				</h:inputText>
+				</h:panelGrid>
+				<br/>
+				<h:panelGrid  columns="2" border="0">
+				<label>ChasisNumber</label>
+				<h:inputText value="#{heyBuddy.vehicle.chasisNumber}"
+					id="chasisNumber" />
+					</h:panelGrid>
+					<br/>
+				<h:panelGrid  columns="2" border="0">	
+				<label>EngineNumber</label>
+				
+				<h:inputText value="#{heyBuddy.vehicle.engineNumber}"
+					id="engineNumber" />
+					</h:panelGrid>
+					<br/>
+				<h:panelGrid  columns="2" border="0">	
+				<label>Model</label>
+				<h:inputText value="#{heyBuddy.vehicle.model}" id="model" />
+				</h:panelGrid>
+				<br/>
+				<h:panelGrid  columns="2" border="0">
+				<label>InsuranceDate</label>
+				<p:calendar value="#{heyBuddy.vehicle.insuranceDate}"
+					id="insuranceDate" />
+					</h:panelGrid>
+					<br/>
+				<h:panelGrid  columns="2" border="0">	
+				<label>NPTAX Date</label>
+				<p:calendar value="#{heyBuddy.vehicle.npTaxDate}" id="nptaxDate" />
+				</h:panelGrid>
+				<br/>
+				<h:panelGrid  columns="2" border="0">
+				<label>QuatertaxDate</label>
+				<p:calendar value="#{heyBuddy.vehicle.quaterTaxDate}" 
+					id="quatertaxDate" />
+					</h:panelGrid>
+					<br/>
+					<h:panelGrid  columns="2" border="0">
+				<label>Number of axile</label>
+				<h:inputText value="#{heyBuddy.vehicle.axile}" id="axile" />
+				</h:panelGrid>
+				<br />
+				
+		
 
-			</h:commandButton>
-			<h:outputText value="#{heyBuddy.name}" id="inputName" />
+			</h:form>
+		</h:panelGroup>
+		<h:panelGroup layout="block" style=" margin-left: 560px;" >
+		<h:commandButton styleClass="myButton" value="click  me" action="#{heyBuddy.performtheAction()}">
 
-		</h:form>
-	</h:panelGroup>
-	<h:panelGroup layout="block" >
-		<h:inputText value="#{heyBuddy.name}" id="test">
-		</h:inputText>
-	</h:panelGroup>
+				</h:commandButton>
+		</h:panelGroup>
 	</h:panelGrid>
 </body>
 
