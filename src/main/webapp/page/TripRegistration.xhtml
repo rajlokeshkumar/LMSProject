@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Vehicle Info</title>
+	<link type="text/css" rel="stylesheet"
+		href="../../style/styleForTripRegister.css"></link>
+
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"></link>
+	<link rel="stylesheet" href="/resources/demos/style.css"></link>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+</h:head>
+
+<body>
+	<h1>Register a Trip</h1>
+	<h:panelGrid columns="1" border="0">
+		<h:panelGroup id="view" layout="block" styleClass="fornewline">
+			<f:view beforePhase="#{heyBuddy.beforePhase}">
+				<h:form>
+					<h:panelGrid columns="4" border='0'>
+						<label>RegistrationNumber</label>
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.vechileNumber}" />
+						<label>VehicleAdvance</label>
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.vehicleAdvance}" />
+
+
+						<label>DriverName 1:</label>
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.driverName1}" />
+						<label>LoadName</label>
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.goodsName}" />
+
+
+						<label>DriverName 2:</label>
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.driverName2}" />
+						<label>LoadName</label>
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.goodsTotalWeight}" />
+
+						<label>CleanerName :</label>
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.cleanerName}" />
+						<label>HirePrice</label>
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.hireprice}" />
+
+
+
+						<label>StartPlace:</label>
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.startPlace}" />
+						<label>LoadAdvance</label>
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.amountpaidonLoad}" />
+
+
+
+
+						<label>EndPlace:</label>
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.endPlace}" />
+						<label>HirePrice</label>
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.amountPaidonOffload}" />
+
+
+
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+
+						<p:dataTable var="fuel"
+							value="#{TripRegistrationController.tripRegisterDto.fuelDto}">
+							<p:column headerText="PlaceOfFuel">
+								<h:outputText value="#{fuel.placeoffuel}" />
+							</p:column>
+
+							<p:column headerText="NumberOfLitre">
+								<h:outputText value="#{fuel.numberofLitre}" />
+							</p:column>
+
+							<p:column headerText="PricePerLitre">
+								<h:outputText value="#{fuel.pricePerlitre}" />
+							</p:column>
+
+							<p:column headerText="TotalAmount">
+								<h:outputText value="#{fuel.totalAmount}" />
+							</p:column>
+
+							<p:column headerText="PayementMethod">
+								<h:outputText value="#{fuel.paymentMode}" />
+							</p:column>
+						</p:dataTable>
+
+
+
+						<p:dataTable var="fuel"
+							value="#{TripRegistrationController.tripRegisterDto.fuelDto}">
+							<p:column headerText="PlaceOfFuel">
+								<h:outputText value="#{fuel.placeoffuel}" />
+							</p:column>
+
+							<p:column headerText="NumberOfLitre">
+								<h:outputText value="#{fuel.numberofLitre}" />
+							</p:column>
+
+							<p:column headerText="PricePerLitre">
+								<h:outputText value="#{fuel.pricePerlitre}" />
+							</p:column>
+
+							<p:column headerText="TotalAmount">
+								<h:outputText value="#{fuel.totalAmount}" />
+							</p:column>
+
+							<p:column headerText="PayementMethod">
+								<h:outputText value="#{fuel.paymentMode}" />
+							</p:column>
+						</p:dataTable>
+					</h:panelGrid>
+
+
+
+					<h:panelGrid columns="5">
+						<h:outputLabel value="PlaceOfFuel" />
+						<h:outputLabel value="NumberOfLitre" />
+						<h:outputLabel value="PricePerLitre" />
+						<h:outputLabel value="TotalAmount" />
+						<h:outputLabel value="PayementMethod" />
+				
+
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.fuelDto.get(0).placeoffuel}"  />
+			
+					<!-- 	<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.fuelDto.get(0).numberofLitre}" />
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.fuelDto.get(0).pricePerlitre}" />
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.fuelDto.get(0).totalAmount}" />
+						<h:inputText
+							value="#{TripRegistrationController.tripRegisterDto.fuelDto.get(0).paymentMode}" /> -->
+
+
+
+
+	
+
+					</h:panelGrid>
+
+				</h:form>
+			</f:view>
+		</h:panelGroup>
+	</h:panelGrid>
+</body>
+
+</html>

@@ -24,6 +24,6 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
-	<welcome-file>page/Home.xhtml</welcome-file>
+	<welcome-file>page/TripRegistration.xhtml</welcome-file>
 	</welcome-file-list>
 </web-app>

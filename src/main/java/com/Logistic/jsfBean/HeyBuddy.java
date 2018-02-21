@@ -7,7 +7,7 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
-import com.LMS.DTO.Vehicle;
+import com.LMS.DTO.VehicleDto;
 import com.LMS.jpaconnectivity.EmployeeJpadaoimpl;
 
 @ViewScoped
@@ -19,17 +19,17 @@ public class HeyBuddy implements PhaseListener {
 		 */
 	private static final long serialVersionUID = 1L;
 
-	private Vehicle vehicle;
+	private VehicleDto vehicle;
 	
 
-	public Vehicle getVehicle() {
+	public VehicleDto getVehicle() {
 		if(this.vehicle==null) {
-			this.vehicle=new Vehicle();
+			this.vehicle=new VehicleDto();
 		}
 		return vehicle;
 	}
 
-	public void setVehicle(Vehicle vehicle) {
+	public void setVehicle(VehicleDto vehicle) {
 		this.vehicle = vehicle;
 	}
 

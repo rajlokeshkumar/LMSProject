@@ -25,6 +25,7 @@
 <h1>Register Trip</h1>
 	<h:panelGrid columns="1" border="0">
 		<h:panelGroup id="view" layout="block" styleClass="fornewline">
+		<f:view beforePhase="#{checkListBookingPhaseListener.beforePhase}">
 			<h:form>
 				<h:panelGrid  columns="2" border="0">
 				<label>RegistrationNumber</label>
@@ -78,6 +79,7 @@
 		
 
 			</h:form>
+			</f:view>
 		</h:panelGroup>
 		<h:panelGroup layout="block" style=" margin-left: 560px;" >
 		<h:commandButton styleClass="myButton" value="click  me" action="#{heyBuddy.performtheAction()}">

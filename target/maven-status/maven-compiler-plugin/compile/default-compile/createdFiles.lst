@@ -1,5 +1,12 @@
 com\LMS\jpaconnectivity\Employee.class
+com\LMS\DTO\FuelDto.class
+com\LMS\DTO\TripRegisterDto.class
 com\LMS\jpaconnectivity\BaseJpadao.class
-com\LMS\jpaconnectivity\EmployeeJpadaoimpl.class
 com\Logistic\jsfBean\HeyBuddy.class
-com\LMS\DTO\Vehicle.class
+com\LMS\DTO\ExpenseonRTOandTOLL.class
+com\LMS\DTO\Constants.class
+com\LMS\DTO\ExpenseOnTripBilled.class
+com\LMS\DTO\VehicleDto.class
+com\LMS\jpaconnectivity\EmployeeJpadaoimpl.class
+com\Logistic\jsfBean\VehicleInformationController.class
+com\Logistic\jsfBean\TripRegistrationController.class
