@@ -1,13 +1,8 @@
 package com.LMS.jpaconnectivity;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-
 public class EmployeeJpadaoimpl extends BaseJpadao{
 
-public Employee selectemp() {
+/*public Employee selectemp() {
 	Employee result=null;
 	try {
 		
@@ -18,9 +13,9 @@ public Employee selectemp() {
 		      Employee employee = entitymanager.find( Employee.class, 1 );
 		      entitymanager.close();
 		      emfactory.close();
-/*		Query a=this.getEntityManager().createQuery("select * from Employee ");
+		Query a=this.getEntityManager().createQuery("select * from Employee ");
 		
-		 result=(Employee) a.getResultList();*/
+		 result=(Employee) a.getResultList();
 	}
 	catch(Exception e) {
 		e.printStackTrace();
@@ -28,6 +23,6 @@ public Employee selectemp() {
 
 	
 	return result;
-}
+}*/
 	
 }

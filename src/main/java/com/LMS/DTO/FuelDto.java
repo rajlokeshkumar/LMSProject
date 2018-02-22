@@ -1,26 +1,43 @@
 package com.LMS.DTO;
 
-public class FuelDto {
+import java.io.Serializable;
+
+public class FuelDto implements Serializable {
+
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 private String placeoffuel;
 
-private int NumberofLitre;
+private Integer NumberofLitre;
 
-private int pricePerlitre;
+private Integer pricePerlitre;
 
 private String state;
 
 private String paymentMode;
 
-private int totalAmount;
+private Integer totalAmount;
+
+private String rowID;
 
 
 
-public int getTotalAmount() {
+public String getRowID() {
+	return rowID;
+}
+
+public void setRowID(String rowID) {
+	this.rowID = rowID;
+}
+
+public Integer getTotalAmount() {
 	return totalAmount;
 }
 
-public void setTotalAmount(int totalAmount) {
+public void setTotalAmount(Integer totalAmount) {
 	this.totalAmount = totalAmount;
 }
 
@@ -32,19 +49,19 @@ public void setPlaceoffuel(String placeoffuel) {
 	this.placeoffuel = placeoffuel;
 }
 
-public int getNumberofLitre() {
+public Integer getNumberofLitre() {
 	return NumberofLitre;
 }
 
-public void setNumberofLitre(int numberofLitre) {
+public void setNumberofLitre(Integer numberofLitre) {
 	NumberofLitre = numberofLitre;
 }
 
-public int getPricePerlitre() {
+public Integer getPricePerlitre() {
 	return pricePerlitre;
 }
 
-public void setPricePerlitre(int pricePerlitre) {
+public void setPricePerlitre(Integer pricePerlitre) {
 	this.pricePerlitre = pricePerlitre;
 }
 

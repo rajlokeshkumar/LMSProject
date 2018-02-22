@@ -20,15 +20,15 @@ private String vehicleAdvance;
 
 private String goodsName;
 
-private int goodsTotalWeight;
+private Integer goodsTotalWeight;
 
-private int hireprice;
+private Integer hireprice;
 
-private int amountpaidonLoad;
+private Integer amountpaidonLoad;
 
-private int amountPaidonOffload;
+private Integer amountPaidonOffload;
 
-private int totalNumberofKM;
+private Integer totalNumberofKM;
 
 private List<FuelDto> fuelDto;
 
@@ -36,29 +36,29 @@ private List<ExpenseOnTripBilled> expenseOnTripBilled;
 
 private List<ExpenseonRTOandTOLL> expenseonRTOandTOLL;
 
-private int commissionAsBilled;
+private Integer commissionAsBilled;
 
-private int totalDieselAmount;
+private Integer totalDieselAmount;
 
-private int totalDriverWageForTrip;
+private Integer totalDriverWageForTrip;
 
-private int cleanerWage;
+private Integer cleanerWage;
 
-private int totalexpenseonRTOandTOLL;
+private Integer totalexpenseonRTOandTOLL;
 
-private int expenseForLoading;
+private Integer expenseForLoading;
 
-private int expenseForunloading;
+private Integer expenseForunloading;
 
-private int totalTollExpense;
+private Integer totalTollExpense;
 
-private int totalunBilledExpense;
+private Integer totalunBilledExpense;
 
-private int totalExpenseForTrip;
+private Integer totalExpenseForTrip;
 
-private int totalIncome;
+private Integer totalIncome;
 
-private int totalprofitOnTrip;
+private Integer totalprofitOnTrip;
 
 public String getVechileNumber() {
 	return vechileNumber;
@@ -124,43 +124,43 @@ public void setGoodsName(String goodsName) {
 	this.goodsName = goodsName;
 }
 
-public int getGoodsTotalWeight() {
+public Integer getGoodsTotalWeight() {
 	return goodsTotalWeight;
 }
 
-public void setGoodsTotalWeight(int goodsTotalWeight) {
+public void setGoodsTotalWeight(Integer goodsTotalWeight) {
 	this.goodsTotalWeight = goodsTotalWeight;
 }
 
-public int getHireprice() {
+public Integer getHireprice() {
 	return hireprice;
 }
 
-public void setHireprice(int hireprice) {
+public void setHireprice(Integer hireprice) {
 	this.hireprice = hireprice;
 }
 
-public int getAmountpaidonLoad() {
+public Integer getAmountpaidonLoad() {
 	return amountpaidonLoad;
 }
 
-public void setAmountpaidonLoad(int amountpaidonLoad) {
+public void setAmountpaidonLoad(Integer amountpaidonLoad) {
 	this.amountpaidonLoad = amountpaidonLoad;
 }
 
-public int getAmountPaidonOffload() {
+public Integer getAmountPaidonOffload() {
 	return amountPaidonOffload;
 }
 
-public void setAmountPaidonOffload(int amountPaidonOffload) {
+public void setAmountPaidonOffload(Integer amountPaidonOffload) {
 	this.amountPaidonOffload = amountPaidonOffload;
 }
 
-public int getTotalNumberofKM() {
+public Integer getTotalNumberofKM() {
 	return totalNumberofKM;
 }
 
-public void setTotalNumberofKM(int totalNumberofKM) {
+public void setTotalNumberofKM(Integer totalNumberofKM) {
 	this.totalNumberofKM = totalNumberofKM;
 }
 
@@ -188,99 +188,99 @@ public void setExpenseonRTOandTOLL(List<ExpenseonRTOandTOLL> expenseonRTOandTOLL
 	this.expenseonRTOandTOLL = expenseonRTOandTOLL;
 }
 
-public int getCommissionAsBilled() {
+public Integer getCommissionAsBilled() {
 	return commissionAsBilled;
 }
 
-public void setCommissionAsBilled(int commissionAsBilled) {
+public void setCommissionAsBilled(Integer commissionAsBilled) {
 	this.commissionAsBilled = commissionAsBilled;
 }
 
-public int getTotalDieselAmount() {
+public Integer getTotalDieselAmount() {
 	return totalDieselAmount;
 }
 
-public void setTotalDieselAmount(int totalDieselAmount) {
+public void setTotalDieselAmount(Integer totalDieselAmount) {
 	this.totalDieselAmount = totalDieselAmount;
 }
 
-public int getTotalDriverWageForTrip() {
+public Integer getTotalDriverWageForTrip() {
 	return totalDriverWageForTrip;
 }
 
-public void setTotalDriverWageForTrip(int totalDriverWageForTrip) {
+public void setTotalDriverWageForTrip(Integer totalDriverWageForTrip) {
 	this.totalDriverWageForTrip = totalDriverWageForTrip;
 }
 
-public int getCleanerWage() {
+public Integer getCleanerWage() {
 	return cleanerWage;
 }
 
-public void setCleanerWage(int cleanerWage) {
+public void setCleanerWage(Integer cleanerWage) {
 	this.cleanerWage = cleanerWage;
 }
 
-public int getTotalexpenseonRTOandTOLL() {
+public Integer getTotalexpenseonRTOandTOLL() {
 	return totalexpenseonRTOandTOLL;
 }
 
-public void setTotalexpenseonRTOandTOLL(int totalexpenseonRTOandTOLL) {
+public void setTotalexpenseonRTOandTOLL(Integer totalexpenseonRTOandTOLL) {
 	this.totalexpenseonRTOandTOLL = totalexpenseonRTOandTOLL;
 }
 
-public int getExpenseForLoading() {
+public Integer getExpenseForLoading() {
 	return expenseForLoading;
 }
 
-public void setExpenseForLoading(int expenseForLoading) {
+public void setExpenseForLoading(Integer expenseForLoading) {
 	this.expenseForLoading = expenseForLoading;
 }
 
-public int getExpenseForunloading() {
+public Integer getExpenseForunloading() {
 	return expenseForunloading;
 }
 
-public void setExpenseForunloading(int expenseForunloading) {
+public void setExpenseForunloading(Integer expenseForunloading) {
 	this.expenseForunloading = expenseForunloading;
 }
 
-public int getTotalTollExpense() {
+public Integer getTotalTollExpense() {
 	return totalTollExpense;
 }
 
-public void setTotalTollExpense(int totalTollExpense) {
+public void setTotalTollExpense(Integer totalTollExpense) {
 	this.totalTollExpense = totalTollExpense;
 }
 
-public int getTotalunBilledExpense() {
+public Integer getTotalunBilledExpense() {
 	return totalunBilledExpense;
 }
 
-public void setTotalunBilledExpense(int totalunBilledExpense) {
+public void setTotalunBilledExpense(Integer totalunBilledExpense) {
 	this.totalunBilledExpense = totalunBilledExpense;
 }
 
-public int getTotalExpenseForTrip() {
+public Integer getTotalExpenseForTrip() {
 	return totalExpenseForTrip;
 }
 
-public void setTotalExpenseForTrip(int totalExpenseForTrip) {
+public void setTotalExpenseForTrip(Integer totalExpenseForTrip) {
 	this.totalExpenseForTrip = totalExpenseForTrip;
 }
 
-public int getTotalIncome() {
+public Integer getTotalIncome() {
 	return totalIncome;
 }
 
-public void setTotalIncome(int totalIncome) {
+public void setTotalIncome(Integer totalIncome) {
 	this.totalIncome = totalIncome;
 }
 
-public int getTotalprofitOnTrip() {
+public Integer getTotalprofitOnTrip() {
 	return totalprofitOnTrip;
 }
 
-public void setTotalprofitOnTrip(int totalprofitOnTrip) {
+public void setTotalprofitOnTrip(Integer totalprofitOnTrip) {
 	this.totalprofitOnTrip = totalprofitOnTrip;
 }
 

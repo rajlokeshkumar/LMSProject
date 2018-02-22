@@ -8,6 +8,9 @@ public class ExpenseOnTripBilled {
 	
 	private boolean expenseBilled;
 
+	private String rowID;
+	
+	
 	public String getPurposeOfBill() {
 		return purposeOfBill;
 	}
@@ -30,6 +33,14 @@ public class ExpenseOnTripBilled {
 
 	public void setExpenseBilled(boolean expenseBilled) {
 		this.expenseBilled = expenseBilled;
+	}
+
+	public String getRowID() {
+		return rowID;
+	}
+
+	public void setRowID(String rowID) {
+		this.rowID = rowID;
 	}
 	
 	
