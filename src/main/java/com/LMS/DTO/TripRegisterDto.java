@@ -1,5 +1,7 @@
 package com.LMS.DTO;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 public class TripRegisterDto {
@@ -16,7 +18,7 @@ private String startPlace;
 
 private String endPlace;
 
-private String vehicleAdvance;
+private Integer vehicleAdvance;
 
 private String goodsName;
 
@@ -38,7 +40,7 @@ private List<ExpenseonRTOandTOLL> expenseonRTOandTOLL;
 
 private Integer commissionAsBilled;
 
-private Integer totalDieselAmount;
+private BigDecimal totalDieselAmount;
 
 private Integer totalDriverWageForTrip;
 
@@ -59,6 +61,27 @@ private Integer totalExpenseForTrip;
 private Integer totalIncome;
 
 private Integer totalprofitOnTrip;
+
+private Date tripStartDate;
+
+private Date tripEndDate;
+
+
+public Date getTripStartDate() {
+	return tripStartDate;
+}
+
+public void setTripStartDate(Date tripStartDate) {
+	this.tripStartDate = tripStartDate;
+}
+
+public Date getTripEndDate() {
+	return tripEndDate;
+}
+
+public void setTripEndDate(Date tripEndDate) {
+	this.tripEndDate = tripEndDate;
+}
 
 public String getVechileNumber() {
 	return vechileNumber;
@@ -108,11 +131,11 @@ public void setEndPlace(String endPlace) {
 	this.endPlace = endPlace;
 }
 
-public String getVehicleAdvance() {
+public Integer getVehicleAdvance() {
 	return vehicleAdvance;
 }
 
-public void setVehicleAdvance(String vehicleAdvance) {
+public void setVehicleAdvance(Integer vehicleAdvance) {
 	this.vehicleAdvance = vehicleAdvance;
 }
 
@@ -196,11 +219,11 @@ public void setCommissionAsBilled(Integer commissionAsBilled) {
 	this.commissionAsBilled = commissionAsBilled;
 }
 
-public Integer getTotalDieselAmount() {
+public BigDecimal getTotalDieselAmount() {
 	return totalDieselAmount;
 }
 
-public void setTotalDieselAmount(Integer totalDieselAmount) {
+public void setTotalDieselAmount(BigDecimal totalDieselAmount) {
 	this.totalDieselAmount = totalDieselAmount;
 }
 

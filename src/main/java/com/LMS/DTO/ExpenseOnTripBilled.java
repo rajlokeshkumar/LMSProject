@@ -1,5 +1,7 @@
 package com.LMS.DTO;
 
+import java.util.Date;
+
 public class ExpenseOnTripBilled {
 
 	private String purposeOfBill;
@@ -10,7 +12,18 @@ public class ExpenseOnTripBilled {
 
 	private String rowID;
 	
+	private Date expenseBilledDate;
 	
+	
+	
+	public Date getExpenseBilledDate() {
+		return expenseBilledDate;
+	}
+
+	public void setExpenseBilledDate(Date expenseBilledDate) {
+		this.expenseBilledDate = expenseBilledDate;
+	}
+
 	public String getPurposeOfBill() {
 		return purposeOfBill;
 	}

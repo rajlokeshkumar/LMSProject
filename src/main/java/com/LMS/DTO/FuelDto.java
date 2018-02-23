@@ -1,6 +1,8 @@
 package com.LMS.DTO;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 public class FuelDto implements Serializable {
 
@@ -11,19 +13,30 @@ public class FuelDto implements Serializable {
 
 private String placeoffuel;
 
-private Integer NumberofLitre;
+private BigDecimal NumberofLitre;
 
-private Integer pricePerlitre;
+private BigDecimal pricePerlitre;
 
 private String state;
 
 private String paymentMode;
 
-private Integer totalAmount;
+private BigDecimal totalAmount;
 
 private String rowID;
 
+private Date dateOfTransaction;
 
+
+
+
+public Date getDateOfTransaction() {
+	return dateOfTransaction;
+}
+
+public void setDateOfTransaction(Date dateOfTransaction) {
+	this.dateOfTransaction = dateOfTransaction;
+}
 
 public String getRowID() {
 	return rowID;
@@ -33,11 +46,11 @@ public void setRowID(String rowID) {
 	this.rowID = rowID;
 }
 
-public Integer getTotalAmount() {
+public BigDecimal getTotalAmount() {
 	return totalAmount;
 }
 
-public void setTotalAmount(Integer totalAmount) {
+public void setTotalAmount(BigDecimal totalAmount) {
 	this.totalAmount = totalAmount;
 }
 
@@ -49,19 +62,19 @@ public void setPlaceoffuel(String placeoffuel) {
 	this.placeoffuel = placeoffuel;
 }
 
-public Integer getNumberofLitre() {
+public BigDecimal getNumberofLitre() {
 	return NumberofLitre;
 }
 
-public void setNumberofLitre(Integer numberofLitre) {
+public void setNumberofLitre(BigDecimal numberofLitre) {
 	NumberofLitre = numberofLitre;
 }
 
-public Integer getPricePerlitre() {
+public BigDecimal getPricePerlitre() {
 	return pricePerlitre;
 }
 
-public void setPricePerlitre(Integer pricePerlitre) {
+public void setPricePerlitre(BigDecimal pricePerlitre) {
 	this.pricePerlitre = pricePerlitre;
 }
 
