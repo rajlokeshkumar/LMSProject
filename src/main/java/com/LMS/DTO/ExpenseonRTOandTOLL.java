@@ -1,5 +1,6 @@
 package com.LMS.DTO;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class ExpenseonRTOandTOLL {
@@ -10,7 +11,7 @@ private String placeofExpense;
 
 private String stateofExpense;
 
-private Integer amountOfExpense;
+private BigDecimal amountOfExpense;
 
 private String rowID;
 
@@ -58,11 +59,11 @@ public void setStateofExpense(String stateofExpense) {
 	this.stateofExpense = stateofExpense;
 }
 
-public Integer getAmountOfExpense() {
+public BigDecimal getAmountOfExpense() {
 	return amountOfExpense;
 }
 
-public void setAmountOfExpense(Integer amountOfExpense) {
+public void setAmountOfExpense(BigDecimal amountOfExpense) {
 	this.amountOfExpense = amountOfExpense;
 }
 

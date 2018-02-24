@@ -1,12 +1,13 @@
 package com.LMS.DTO;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class ExpenseOnTripBilled {
 
 	private String purposeOfBill;
 	
-	private String amountpaid;
+	private BigDecimal amountpaid;
 	
 	private boolean expenseBilled;
 
@@ -32,11 +33,11 @@ public class ExpenseOnTripBilled {
 		this.purposeOfBill = purposeOfBill;
 	}
 
-	public String getAmountpaid() {
+	public BigDecimal getAmountpaid() {
 		return amountpaid;
 	}
 
-	public void setAmountpaid(String amountpaid) {
+	public void setAmountpaid(BigDecimal amountpaid) {
 		this.amountpaid = amountpaid;
 	}
 

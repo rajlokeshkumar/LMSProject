@@ -2,6 +2,7 @@ package com.Logistic.jsfBean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
@@ -91,7 +93,7 @@ public class TripRegistrationController implements Serializable {
 		List<ExpenseonRTOandTOLL> aExpenseonRTOandTOLL = new ArrayList<>(8);
 		for (int i = 0; i < 8; i++) {
 			ExpenseonRTOandTOLL bExpenseonRTOandTOLL = new ExpenseonRTOandTOLL();
-			bExpenseonRTOandTOLL.setRowID("Expense on Toll" + i);
+			bExpenseonRTOandTOLL.setRowID(String.valueOf(i));
 			aExpenseonRTOandTOLL.add(bExpenseonRTOandTOLL);
 		}
 		this.getExpenseonRTOandTOLL().addAll(aExpenseonRTOandTOLL);
@@ -200,11 +202,65 @@ public class TripRegistrationController implements Serializable {
 			processDoneOnFuelTable((FuelDto) event.getObject());
 			msg = new FacesMessage("Fuel Edited", ((FuelDto) event.getObject()).getRowID());
 		} else if (event.getObject() instanceof ExpenseOnTripBilled) {
+			this.processDoneOnBilledExpenseTable((ExpenseOnTripBilled) event.getObject());
 			msg = new FacesMessage("Expense Edited", ((ExpenseOnTripBilled) event.getObject()).getRowID());
 		} else if (event.getObject() instanceof ExpenseonRTOandTOLL) {
+			this.processDoneOnExpenseonRTOandToll((ExpenseonRTOandTOLL) event.getObject());
+			int listmaxSize=Integer.valueOf(((ExpenseonRTOandTOLL) event.getObject()).getRowID());
+			if(this.getExpenseonRTOandTOLL().size()==listmaxSize+1) {
+				this.setExpenseonRTOandTOLL(FillBilledExpese(this.getExpenseonRTOandTOLL()));
+			}
 			msg = new FacesMessage("Expense Edited", ((ExpenseonRTOandTOLL) event.getObject()).getRowID());
 		}
+		this.getTripRegisterDto().setTotalExpenseForTrip(new BigDecimal(0));
+		this.getTripRegisterDto().setTotalIncome(new BigDecimal(0));
+		this.getTripRegisterDto().setTotalprofitOnTrip(0);
+		calculateWages();
+		calculateTotalhireprice();
+		calculateTotalExpense();
+		calculateTotalProfit();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+		RequestContext.getCurrentInstance().update("tripRegister:ExpenseOnRTOandToll");
+	}
+
+	private List<ExpenseonRTOandTOLL> FillBilledExpese(List<ExpenseonRTOandTOLL> pExpenseonRTOandTOLL) {
+		List<ExpenseonRTOandTOLL> cExpenseonRTOandTOLL = new ArrayList<>(5);
+		int size=pExpenseonRTOandTOLL.size();
+		for (int i =size ; i <= size+4; i++) {
+			ExpenseonRTOandTOLL bExpenseonRTOandTOLL = new ExpenseonRTOandTOLL();
+			bExpenseonRTOandTOLL.setRowID(String.valueOf(i));
+			cExpenseonRTOandTOLL.add(bExpenseonRTOandTOLL);
+		}
+		pExpenseonRTOandTOLL.addAll(cExpenseonRTOandTOLL);
+		return pExpenseonRTOandTOLL;
+	}
+	
+	
+	private void processDoneOnExpenseonRTOandToll(ExpenseonRTOandTOLL pExpenseonRTOandTOLL) {
+		BigDecimal totalTollAmount = new BigDecimal(0);
+		BigDecimal totalRTOExpense = new BigDecimal(0);
+		for (ExpenseonRTOandTOLL aExpenseonRTOandTOLL : this.getExpenseonRTOandTOLL()) {
+			if (Constants.RTO.equals(aExpenseonRTOandTOLL.getExpenseType())
+					&& aExpenseonRTOandTOLL.getAmountOfExpense() != null) {
+				totalRTOExpense = totalRTOExpense.add(aExpenseonRTOandTOLL.getAmountOfExpense());
+			} else if (Constants.TOLL.equals(aExpenseonRTOandTOLL.getExpenseType())
+					&& aExpenseonRTOandTOLL.getAmountOfExpense() != null) {
+				totalTollAmount = totalTollAmount.add(aExpenseonRTOandTOLL.getAmountOfExpense());
+			}
+
+		}
+		this.getTripRegisterDto().setTotalexpenseonRTOandTOLL(totalRTOExpense);
+		this.getTripRegisterDto().setTotalTollExpense(totalTollAmount);
+	}
+
+	private void processDoneOnBilledExpenseTable(ExpenseOnTripBilled pExpenseOnTripBilled) {
+		BigDecimal totalAmountBilled = new BigDecimal(0);
+		for (ExpenseOnTripBilled aExpenseOnTripBilled : this.getBilledExpense()) {
+			if (aExpenseOnTripBilled.getAmountpaid() != null) {
+				totalAmountBilled = totalAmountBilled.add(aExpenseOnTripBilled.getAmountpaid());
+			}
+		}
+		this.getTripRegisterDto().setTotalBilledExpense(totalAmountBilled);
 	}
 
 	private void processDoneOnFuelTable(FuelDto pFuelDto) throws ParseException {
@@ -234,12 +290,31 @@ public class TripRegistrationController implements Serializable {
 	public void onRowCancel(RowEditEvent event) {
 		FacesMessage msg = null;
 		if (event.getObject() instanceof FuelDto) {
+			String rowID=((FuelDto) event.getObject()).getRowID();
+			if (this.getFuelDtoForTable().remove((FuelDto) event.getObject())) {
+				FuelDto a=new FuelDto();
+				a.setRowID(rowID);
+				this.getFuelDtoForTable().add(a);
+			}
 			msg = new FacesMessage("Fuel Edited", ((FuelDto) event.getObject()).getRowID());
 		} else if (event.getObject() instanceof ExpenseOnTripBilled) {
+			if (this.getBilledExpense().remove((ExpenseOnTripBilled) event.getObject())) {
+				this.getBilledExpense().add(new ExpenseOnTripBilled());
+			}
 			msg = new FacesMessage("Expense Edited", ((ExpenseOnTripBilled) event.getObject()).getRowID());
 		} else if (event.getObject() instanceof ExpenseonRTOandTOLL) {
+			if (this.getExpenseonRTOandTOLL().remove((ExpenseonRTOandTOLL) event.getObject())) {
+				this.getExpenseonRTOandTOLL().add(new ExpenseonRTOandTOLL());
+			}
 			msg = new FacesMessage("Expense Edited", ((ExpenseonRTOandTOLL) event.getObject()).getRowID());
 		}
+		this.getTripRegisterDto().setTotalExpenseForTrip(new BigDecimal(0));
+		this.getTripRegisterDto().setTotalIncome(new BigDecimal(0));
+		this.getTripRegisterDto().setTotalprofitOnTrip(0);
+		calculateWages();
+		calculateTotalhireprice();
+		calculateTotalExpense();
+		calculateTotalProfit();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
@@ -256,6 +331,107 @@ public class TripRegistrationController implements Serializable {
 
 	public void processButton() {
 
+	}
+
+	public void calculateBaseOnInputdata() {
+		this.getTripRegisterDto().setTotalExpenseForTrip(new BigDecimal(0));
+		this.getTripRegisterDto().setTotalIncome(new BigDecimal(0));
+		this.getTripRegisterDto().setTotalprofitOnTrip(0);
+		calculateWages();
+		calculateTotalhireprice();
+		calculateTotalExpense();
+		calculateTotalProfit();
+		calculateRemainingHirePrice();
+	}
+
+	public void calculateWages() {
+		if (this.getTripRegisterDto().getHireprice() != null && this.getTripRegisterDto().getHireprice() != 0) {
+			BigDecimal driverWage = new BigDecimal(0);
+			BigDecimal cleanerWage = new BigDecimal(0);
+			BigDecimal commissionOnLoad = new BigDecimal(0);
+			driverWage = BigDecimal.valueOf(this.getTripRegisterDto().getHireprice()).multiply(new BigDecimal(0.14),
+					MathContext.DECIMAL32);
+			cleanerWage = BigDecimal.valueOf(this.getTripRegisterDto().getHireprice()).multiply(new BigDecimal(0.02),
+					MathContext.DECIMAL32);
+			commissionOnLoad = BigDecimal.valueOf(this.getTripRegisterDto().getHireprice())
+					.multiply(new BigDecimal(0.02), MathContext.DECIMAL32);
+
+			this.getTripRegisterDto().setCleanerWage(cleanerWage);
+			this.getTripRegisterDto().setTotalDriverWageForTrip(driverWage);
+			this.getTripRegisterDto().setCommissionAsBilled(commissionOnLoad);
+			if (this.getTripRegisterDto().getTotalIncome() == null) {
+				this.getTripRegisterDto().setTotalIncome(new BigDecimal(0));
+			}
+			this.getTripRegisterDto().setTotalIncome(this.getTripRegisterDto().getTotalIncome()
+					.add(BigDecimal.valueOf(this.getTripRegisterDto().getHireprice())));
+		}
+	}
+
+	public void calculateTotalhireprice() {
+		if (this.getTripRegisterDto().getTotalIncome() == null) {
+			this.getTripRegisterDto().setTotalIncome(new BigDecimal(0));
+		}
+		BigDecimal totalIncome = this.getTripRegisterDto().getTotalIncome();
+		if (this.getTripRegisterDto().getVehicleAdvance() != null) {
+			totalIncome = totalIncome.add(this.getTripRegisterDto().getVehicleAdvance());
+		}
+		this.getTripRegisterDto().setTotalIncome(totalIncome);
+
+	}
+
+	public void calculateTotalExpense() {
+		BigDecimal totalExpense = new BigDecimal(0);
+		if (this.getTripRegisterDto().getTotalBilledExpense() != null) {
+			totalExpense = totalExpense.add(this.getTripRegisterDto().getTotalBilledExpense());
+		}
+		if (this.getTripRegisterDto().getExpenseForLoading() != null) {
+			totalExpense = totalExpense.add(this.getTripRegisterDto().getExpenseForLoading());
+		}
+		if (this.getTripRegisterDto().getExpenseForunloading() != null) {
+			totalExpense = totalExpense.add(this.getTripRegisterDto().getExpenseForunloading());
+		}
+		if (this.getTripRegisterDto().getTotalexpenseonRTOandTOLL() != null) {
+			totalExpense = totalExpense.add(this.getTripRegisterDto().getTotalexpenseonRTOandTOLL());
+		}
+		if (this.getTripRegisterDto().getTotalTollExpense() != null) {
+			totalExpense = totalExpense.add(this.getTripRegisterDto().getTotalTollExpense());
+		}
+		if (this.getTripRegisterDto().getTotalDieselAmount() != null) {
+			totalExpense = totalExpense.add(this.getTripRegisterDto().getTotalDieselAmount());
+		}
+		if (this.getTripRegisterDto().getCommissionAsBilled() != null) {
+			totalExpense = totalExpense.add(this.getTripRegisterDto().getCommissionAsBilled());
+		}
+		if (this.getTripRegisterDto().getTotalDriverWageForTrip() != null) {
+			totalExpense = totalExpense.add(this.getTripRegisterDto().getTotalDriverWageForTrip());
+		}
+		if (this.getTripRegisterDto().getCleanerWage() != null) {
+			totalExpense = totalExpense.add(this.getTripRegisterDto().getCleanerWage());
+		}
+
+		this.getTripRegisterDto().setTotalExpenseForTrip(totalExpense);
+
+	}
+
+	public void calculateTotalProfit() {
+		int totalProfitOnTrip = 0;
+		if (this.getTripRegisterDto().getTotalExpenseForTrip() != null
+				&& this.getTripRegisterDto().getTotalIncome() != null) {
+			totalProfitOnTrip = this.getTripRegisterDto().getTotalIncome()
+					.subtract(this.getTripRegisterDto().getTotalExpenseForTrip()).intValue();
+			this.getTripRegisterDto().setTotalprofitOnTrip(totalProfitOnTrip);
+		}
+
+	}
+
+	public void calculateRemainingHirePrice() {
+		int amountPaidonOfLoad = 0;
+		if (this.getTripRegisterDto().getAmountpaidonLoad() != null
+				&& this.getTripRegisterDto().getHireprice() != null) {
+			amountPaidonOfLoad = this.getTripRegisterDto().getHireprice().intValue()
+					- this.getTripRegisterDto().getAmountpaidonLoad().intValue();
+			this.getTripRegisterDto().setAmountPaidonOffload(BigDecimal.valueOf(amountPaidonOfLoad));
+		}
 	}
 
 }

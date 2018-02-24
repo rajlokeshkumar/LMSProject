@@ -24,7 +24,7 @@
 <body>
 	<h1>Register a Trip</h1>
 	<h:panelGrid columns="1" border="0">
-		<h:panelGroup id="view" layout="block" styleClass="fornewline">
+		<h:panelGroup id="view" layout="block">
 			<f:view beforePhase="#{heyBuddy.beforePhase}">
 				<h:form id="tripRegister">
 
@@ -44,6 +44,9 @@
 							required="true" requiredMessage="VehicleAdvance is Mandatory"
 							converterMessage="Enter a valid Vehicle Advance"
 							styleClass="inputtextboxBig">
+							<f:ajax event="change"
+								listener="#{TripRegistrationController.calculateBaseOnInputdata()}"
+								render=":tripRegister:totalProfitOnTrip :tripRegister:totalIncomewithAdvance tripRegister:totalExpenseForTrip "></f:ajax>
 						</h:inputText>
 
 						<label>FirstDriver</label>
@@ -92,6 +95,9 @@
 							converterMessage="Enter a valid Hire price"
 							value="#{TripRegistrationController.tripRegisterDto.hireprice}"
 							styleClass="inputtextboxBig">
+							<f:ajax event="change"
+								listener="#{TripRegistrationController.calculateBaseOnInputdata()}"
+								render=":tripRegister:commission :tripRegister:cleanerWage :tripRegister:totaldriverWage :tripRegister:totalProfitOnTrip :tripRegister:totalIncomewithAdvance tripRegister:totalExpenseForTrip "></f:ajax>
 						</h:inputText>
 
 
@@ -132,10 +138,9 @@
 						<p:calendar id="tripEndDate" pattern="dd-MMM-yyyy"
 							value="#{TripRegistrationController.tripRegisterDto.tripEndDate}">
 						</p:calendar>
-
-
 						<p:messages
-							for="VehicleNumber,vehicleAdvance,driverName1,driverName2,loadName,totalWeight,cleanerName,hirePrice,startplace,loadAdvance,endplace,Remaininghireprice" />
+							for="VehicleNumber,vehicleAdvance,driverName1,driverName2,loadName,totalWeight,cleanerName,
+							hirePrice,startplace,loadAdvance,endplace,Remaininghireprice" />
 					</h:panelGrid>
 
 					<p:growl id="msgs" showDetail="true" />
@@ -150,7 +155,7 @@
 
 							<p:ajax event="rowEdit"
 								listener="#{TripRegistrationController.onRowEdit}"
-								update=":tripRegister:msgs,:tripRegister:totalFuelExpense" />
+								update=":tripRegister:msgs,:tripRegister:totalFuelExpense,:tripRegister:totalProfitOnTrip,:tripRegister:totalIncomewithAdvance,tripRegister:totalExpenseForTrip" />
 							<p:ajax event="rowEditCancel"
 								listener="#{TripRegistrationController.onRowCancel}"
 								update=":tripRegister:msgs" />
@@ -158,8 +163,8 @@
 							<p:column headerText="Date">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{vehicle.dateOfTransaction}" >
-										<f:convertDateTime pattern="dd-MMM-yyyy"/>
+										<h:outputText value="#{vehicle.dateOfTransaction}">
+											<f:convertDateTime pattern="dd-MMM-yyyy" />
 										</h:outputText>
 									</f:facet>
 									<f:facet name="input">
@@ -251,7 +256,7 @@
 
 							<p:ajax event="rowEdit"
 								listener="#{TripRegistrationController.onRowEdit}"
-								update=":tripRegister:msgs" />
+								update=":tripRegister:msgs,:tripRegister:totalBilledExpense,:tripRegister:totalProfitOnTrip,:tripRegister:totalIncomewithAdvance,tripRegister:totalExpenseForTrip" />
 							<p:ajax event="rowEditCancel"
 								listener="#{TripRegistrationController.onRowCancel}"
 								update=":tripRegister:msgs" />
@@ -260,7 +265,9 @@
 							<p:column headerText="Date">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{billed.expenseBilledDate}" />
+										<h:outputText value="#{billed.expenseBilledDate}">
+											<f:convertDateTime pattern="dd-MMM-yyyy" />
+										</h:outputText>
 									</f:facet>
 									<f:facet name="input">
 										<p:calendar id="expenseBilledDate" pattern="dd-MMM-yyyy"
@@ -280,13 +287,13 @@
 								</p:cellEditor>
 							</p:column>
 
-							<p:column headerText="Expense Billed">
+							<p:column headerText="Amount Billed">
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{billed.amountpaid}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{billed.amountpaid}" style="width:50%"
+										<p:inputText value="#{billed.amountpaid}" style="width:100%"
 											label="Expense Billed" />
 									</f:facet>
 								</p:cellEditor>
@@ -308,7 +315,7 @@
 
 							<p:ajax event="rowEdit"
 								listener="#{TripRegistrationController.onRowEdit}"
-								update=":tripRegister:msgs" />
+								update="ExpenseOnRTOandToll,:tripRegister:msgs,:tripRegister:expenseOnRTO,:tripRegister:totalTollExpense,:tripRegister:totalProfitOnTrip,:tripRegister:totalIncomewithAdvance,tripRegister:totalExpenseForTrip" />
 							<p:ajax event="rowEditCancel"
 								listener="#{TripRegistrationController.onRowCancel}"
 								update=":tripRegister:msgs" />
@@ -316,12 +323,15 @@
 							<p:column headerText="Date of Expense">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{tollExpense.expenseDate}" />
+										<h:outputText value="#{tollExpense.expenseDate}">
+											<f:convertDateTime pattern="dd-MMM-yyyy" />
+										</h:outputText>
 									</f:facet>
 
 									<f:facet name="input">
-										<p:calendar value="#{tollExpense.expenseDate}" pattern="dd-MMM-yyyy"></p:calendar>
-								
+										<p:calendar value="#{tollExpense.expenseDate}"
+											pattern="dd-MMM-yyyy"></p:calendar>
+
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
@@ -396,20 +406,20 @@
 
 							<h:outputLabel value="CommissionOnLoad"
 								styleClass="LabelforSummary" />
-							<h:inputText
+							<h:inputText id="commission" disabled="true"
 								value="#{TripRegistrationController.tripRegisterDto.commissionAsBilled}"
 								styleClass="inputtextboxBig" />
 							<h:outputLabel value="TotalFuelExpense"
 								styleClass="LabelforSummary" />
-							<h:inputText id="totalFuelExpense"
+							<h:inputText id="totalFuelExpense" disabled="true"
 								value="#{TripRegistrationController.tripRegisterDto.totalDieselAmount}"
 								styleClass="inputtextboxBig" />
 							<h:outputLabel value="DriverWage" styleClass="LabelforSummary" />
-							<h:inputText
+							<h:inputText id="totaldriverWage" disabled="true"
 								value="#{TripRegistrationController.tripRegisterDto.totalDriverWageForTrip}"
 								styleClass="inputtextboxBig" />
 							<h:outputLabel value="cleanerWage" styleClass="LabelforSummary" />
-							<h:inputText
+							<h:inputText id="cleanerWage" disabled="true"
 								value="#{TripRegistrationController.tripRegisterDto.cleanerWage}"
 								styleClass="inputtextboxBig" />
 
@@ -417,24 +427,36 @@
 						<p:panelGrid columns="2">
 							<h:outputLabel value="TotalRTOExpense"
 								styleClass="LabelforSummary" />
-							<h:inputText
+							<h:inputText id="expenseOnRTO" disabled="true"
 								value="#{TripRegistrationController.tripRegisterDto.totalexpenseonRTOandTOLL}"
 								styleClass="inputtextboxBig" />
 							<h:outputLabel value="ExpenseFor Loading Truck"
 								styleClass="LabelforSummary" />
 							<h:inputText
 								value="#{TripRegistrationController.tripRegisterDto.expenseForLoading}"
-								styleClass="inputtextboxBig" />
+								styleClass="inputtextboxBig">
+								<f:ajax event="change"
+									listener="#{TripRegistrationController.calculateBaseOnInputdata()}"
+									render=":tripRegister:totalProfitOnTrip :tripRegister:totalIncomewithAdvance tripRegister:totalExpenseForTrip "></f:ajax>
+							</h:inputText>
 							<h:outputLabel value="ExpenseFor UnLoading"
 								styleClass="LabelforSummary" />
 							<h:inputText
 								value="#{TripRegistrationController.tripRegisterDto.expenseForunloading}"
-								styleClass="inputtextboxBig" />
+								styleClass="inputtextboxBig">
+								<f:ajax event="change"
+									listener="#{TripRegistrationController.calculateBaseOnInputdata()}"
+									render=":tripRegister:totalProfitOnTrip :tripRegister:totalIncomewithAdvance tripRegister:totalExpenseForTrip "></f:ajax>
+							</h:inputText>
 							<h:outputLabel value="TOLL Expense" styleClass="LabelforSummary" />
-							<h:inputText
+							<h:inputText id="totalTollExpense" disabled="true"
 								value="#{TripRegistrationController.tripRegisterDto.totalTollExpense}"
 								styleClass="inputtextboxBig" />
-
+							<h:outputLabel value="Total Billed Expense"
+								styleClass="LabelforSummary" />
+							<h:inputText id="totalBilledExpense" disabled="true"
+								value="#{TripRegistrationController.tripRegisterDto.totalBilledExpense}"
+								styleClass="inputtextboxBig" />
 						</p:panelGrid>
 
 						<p:panelGrid columns="2" styleClass="styleForOutputtext">
@@ -442,15 +464,17 @@
 							<h:outputLabel value="TotalTripExpense"
 								styleClass="LabelforSummary" />
 							<h:inputText styleClass="inputtextboxBig"
+								id="totalExpenseForTrip"
 								value="#{TripRegistrationController.tripRegisterDto.totalExpenseForTrip}"
 								disabled="true" />
 							<h:outputLabel value="TotalHirePrice"
 								styleClass="LabelforSummary" />
 							<h:inputText styleClass="inputtextboxBig"
+								id="totalIncomewithAdvance"
 								value="#{TripRegistrationController.tripRegisterDto.totalIncome}"
 								disabled="true" />
 							<h:outputLabel value="ProfitOnTrip" styleClass="LabelforSummary" />
-							<h:inputText styleClass="inputtextboxBig"
+							<h:inputText styleClass="inputtextboxBig" id="totalProfitOnTrip"
 								value="#{TripRegistrationController.tripRegisterDto.totalprofitOnTrip}"
 								disabled="true" />
 						</p:panelGrid>

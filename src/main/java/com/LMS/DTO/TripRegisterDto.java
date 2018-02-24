@@ -18,7 +18,7 @@ private String startPlace;
 
 private String endPlace;
 
-private Integer vehicleAdvance;
+private BigDecimal vehicleAdvance;
 
 private String goodsName;
 
@@ -26,9 +26,9 @@ private Integer goodsTotalWeight;
 
 private Integer hireprice;
 
-private Integer amountpaidonLoad;
+private BigDecimal amountpaidonLoad;
 
-private Integer amountPaidonOffload;
+private BigDecimal amountPaidonOffload;
 
 private Integer totalNumberofKM;
 
@@ -38,27 +38,27 @@ private List<ExpenseOnTripBilled> expenseOnTripBilled;
 
 private List<ExpenseonRTOandTOLL> expenseonRTOandTOLL;
 
-private Integer commissionAsBilled;
+private BigDecimal commissionAsBilled;
 
 private BigDecimal totalDieselAmount;
 
-private Integer totalDriverWageForTrip;
+private BigDecimal totalDriverWageForTrip;
 
-private Integer cleanerWage;
+private BigDecimal cleanerWage;
 
-private Integer totalexpenseonRTOandTOLL;
+private BigDecimal totalexpenseonRTOandTOLL;
 
-private Integer expenseForLoading;
+private BigDecimal expenseForLoading;
 
-private Integer expenseForunloading;
+private BigDecimal expenseForunloading;
 
-private Integer totalTollExpense;
+private BigDecimal totalTollExpense;
 
 private Integer totalunBilledExpense;
 
-private Integer totalExpenseForTrip;
+private BigDecimal totalExpenseForTrip;
 
-private Integer totalIncome;
+private BigDecimal totalIncome;
 
 private Integer totalprofitOnTrip;
 
@@ -66,6 +66,17 @@ private Date tripStartDate;
 
 private Date tripEndDate;
 
+private BigDecimal totalBilledExpense;
+
+
+
+public BigDecimal getTotalBilledExpense() {
+	return totalBilledExpense;
+}
+
+public void setTotalBilledExpense(BigDecimal totalBilledExpense) {
+	this.totalBilledExpense = totalBilledExpense;
+}
 
 public Date getTripStartDate() {
 	return tripStartDate;
@@ -131,11 +142,11 @@ public void setEndPlace(String endPlace) {
 	this.endPlace = endPlace;
 }
 
-public Integer getVehicleAdvance() {
+public BigDecimal getVehicleAdvance() {
 	return vehicleAdvance;
 }
 
-public void setVehicleAdvance(Integer vehicleAdvance) {
+public void setVehicleAdvance(BigDecimal vehicleAdvance) {
 	this.vehicleAdvance = vehicleAdvance;
 }
 
@@ -163,19 +174,19 @@ public void setHireprice(Integer hireprice) {
 	this.hireprice = hireprice;
 }
 
-public Integer getAmountpaidonLoad() {
+public BigDecimal getAmountpaidonLoad() {
 	return amountpaidonLoad;
 }
 
-public void setAmountpaidonLoad(Integer amountpaidonLoad) {
+public void setAmountpaidonLoad(BigDecimal amountpaidonLoad) {
 	this.amountpaidonLoad = amountpaidonLoad;
 }
 
-public Integer getAmountPaidonOffload() {
+public BigDecimal getAmountPaidonOffload() {
 	return amountPaidonOffload;
 }
 
-public void setAmountPaidonOffload(Integer amountPaidonOffload) {
+public void setAmountPaidonOffload(BigDecimal amountPaidonOffload) {
 	this.amountPaidonOffload = amountPaidonOffload;
 }
 
@@ -211,11 +222,11 @@ public void setExpenseonRTOandTOLL(List<ExpenseonRTOandTOLL> expenseonRTOandTOLL
 	this.expenseonRTOandTOLL = expenseonRTOandTOLL;
 }
 
-public Integer getCommissionAsBilled() {
+public BigDecimal getCommissionAsBilled() {
 	return commissionAsBilled;
 }
 
-public void setCommissionAsBilled(Integer commissionAsBilled) {
+public void setCommissionAsBilled(BigDecimal commissionAsBilled) {
 	this.commissionAsBilled = commissionAsBilled;
 }
 
@@ -227,51 +238,51 @@ public void setTotalDieselAmount(BigDecimal totalDieselAmount) {
 	this.totalDieselAmount = totalDieselAmount;
 }
 
-public Integer getTotalDriverWageForTrip() {
+public BigDecimal getTotalDriverWageForTrip() {
 	return totalDriverWageForTrip;
 }
 
-public void setTotalDriverWageForTrip(Integer totalDriverWageForTrip) {
+public void setTotalDriverWageForTrip(BigDecimal totalDriverWageForTrip) {
 	this.totalDriverWageForTrip = totalDriverWageForTrip;
 }
 
-public Integer getCleanerWage() {
+public BigDecimal getCleanerWage() {
 	return cleanerWage;
 }
 
-public void setCleanerWage(Integer cleanerWage) {
+public void setCleanerWage(BigDecimal cleanerWage) {
 	this.cleanerWage = cleanerWage;
 }
 
-public Integer getTotalexpenseonRTOandTOLL() {
+public BigDecimal getTotalexpenseonRTOandTOLL() {
 	return totalexpenseonRTOandTOLL;
 }
 
-public void setTotalexpenseonRTOandTOLL(Integer totalexpenseonRTOandTOLL) {
+public void setTotalexpenseonRTOandTOLL(BigDecimal totalexpenseonRTOandTOLL) {
 	this.totalexpenseonRTOandTOLL = totalexpenseonRTOandTOLL;
 }
 
-public Integer getExpenseForLoading() {
+public BigDecimal getExpenseForLoading() {
 	return expenseForLoading;
 }
 
-public void setExpenseForLoading(Integer expenseForLoading) {
+public void setExpenseForLoading(BigDecimal expenseForLoading) {
 	this.expenseForLoading = expenseForLoading;
 }
 
-public Integer getExpenseForunloading() {
+public BigDecimal getExpenseForunloading() {
 	return expenseForunloading;
 }
 
-public void setExpenseForunloading(Integer expenseForunloading) {
+public void setExpenseForunloading(BigDecimal expenseForunloading) {
 	this.expenseForunloading = expenseForunloading;
 }
 
-public Integer getTotalTollExpense() {
+public BigDecimal getTotalTollExpense() {
 	return totalTollExpense;
 }
 
-public void setTotalTollExpense(Integer totalTollExpense) {
+public void setTotalTollExpense(BigDecimal totalTollExpense) {
 	this.totalTollExpense = totalTollExpense;
 }
 
@@ -283,19 +294,19 @@ public void setTotalunBilledExpense(Integer totalunBilledExpense) {
 	this.totalunBilledExpense = totalunBilledExpense;
 }
 
-public Integer getTotalExpenseForTrip() {
+public BigDecimal getTotalExpenseForTrip() {
 	return totalExpenseForTrip;
 }
 
-public void setTotalExpenseForTrip(Integer totalExpenseForTrip) {
+public void setTotalExpenseForTrip(BigDecimal totalExpenseForTrip) {
 	this.totalExpenseForTrip = totalExpenseForTrip;
 }
 
-public Integer getTotalIncome() {
+public BigDecimal getTotalIncome() {
 	return totalIncome;
 }
 
-public void setTotalIncome(Integer totalIncome) {
+public void setTotalIncome(BigDecimal totalIncome) {
 	this.totalIncome = totalIncome;
 }
 
