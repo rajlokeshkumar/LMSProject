@@ -3,7 +3,7 @@ package com.LMS.DTO;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ExpenseonRTOandTOLL {
+public class ExpenseonRTOandTOLLDto {
 
 private Constants expenseType;
 

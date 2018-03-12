@@ -19,10 +19,11 @@ import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 import com.LMS.DTO.Constants;
-import com.LMS.DTO.ExpenseOnTripBilled;
-import com.LMS.DTO.ExpenseonRTOandTOLL;
+import com.LMS.DTO.ExpenseOnTripBilledDto;
+import com.LMS.DTO.ExpenseonRTOandTOLLDto;
 import com.LMS.DTO.FuelDto;
 import com.LMS.DTO.TripRegisterDto;
+import com.javawebtutor.Test;
 
 @ViewScoped
 @ManagedBean(name = "TripRegistrationController")
@@ -37,9 +38,9 @@ public class TripRegistrationController implements Serializable {
 
 	private List<FuelDto> fuelDtoForTable;
 
-	private List<ExpenseOnTripBilled> billedExpense;
+	private List<ExpenseOnTripBilledDto> billedExpense;
 
-	private List<ExpenseonRTOandTOLL> expenseonRTOandTOLL = new ArrayList<>(8);
+	private List<ExpenseonRTOandTOLLDto> expenseonRTOandTOLL = new ArrayList<>(8);
 
 	private List<Constants> typeOfExpense = new ArrayList<>();
 
@@ -73,16 +74,19 @@ public class TripRegistrationController implements Serializable {
 		this.typeOfExpense = typeOfExpense;
 	}
 
-	public List<ExpenseonRTOandTOLL> getExpenseonRTOandTOLL() {
+	public List<ExpenseonRTOandTOLLDto> getExpenseonRTOandTOLL() {
 		return expenseonRTOandTOLL;
 	}
 
-	public void setExpenseonRTOandTOLL(List<ExpenseonRTOandTOLL> expenseonRTOandTOLL) {
+	public void setExpenseonRTOandTOLL(List<ExpenseonRTOandTOLLDto> expenseonRTOandTOLL) {
 		this.expenseonRTOandTOLL = expenseonRTOandTOLL;
 	}
 
 	@PostConstruct
 	public void init() {
+		
+		Test a=new Test();
+		a.testonDB();
 		this.preFillDiesel();
 		this.preFillBilledExpese();
 		this.preFillRTOandTOLLExpense();
@@ -90,9 +94,9 @@ public class TripRegistrationController implements Serializable {
 	}
 
 	private void preFillRTOandTOLLExpense() {
-		List<ExpenseonRTOandTOLL> aExpenseonRTOandTOLL = new ArrayList<>(8);
+		List<ExpenseonRTOandTOLLDto> aExpenseonRTOandTOLL = new ArrayList<>(8);
 		for (int i = 0; i < 8; i++) {
-			ExpenseonRTOandTOLL bExpenseonRTOandTOLL = new ExpenseonRTOandTOLL();
+			ExpenseonRTOandTOLLDto bExpenseonRTOandTOLL = new ExpenseonRTOandTOLLDto();
 			bExpenseonRTOandTOLL.setRowID(String.valueOf(i));
 			aExpenseonRTOandTOLL.add(bExpenseonRTOandTOLL);
 		}
@@ -101,11 +105,11 @@ public class TripRegistrationController implements Serializable {
 		typeOfExpense.add(Constants.TOLL);
 	}
 
-	public List<ExpenseOnTripBilled> getBilledExpense() {
+	public List<ExpenseOnTripBilledDto> getBilledExpense() {
 		return billedExpense;
 	}
 
-	public void setBilledExpense(List<ExpenseOnTripBilled> billedExpense) {
+	public void setBilledExpense(List<ExpenseOnTripBilledDto> billedExpense) {
 		this.billedExpense = billedExpense;
 	}
 
@@ -118,10 +122,10 @@ public class TripRegistrationController implements Serializable {
 	}
 
 	private void preFillBilledExpese() {
-		List<ExpenseOnTripBilled> abilledExpense = new ArrayList<>(5);
+		List<ExpenseOnTripBilledDto> abilledExpense = new ArrayList<>(5);
 
 		for (int i = 0; i <= 4; i++) {
-			ExpenseOnTripBilled bExpenseOnTripBilled = new ExpenseOnTripBilled();
+			ExpenseOnTripBilledDto bExpenseOnTripBilled = new ExpenseOnTripBilledDto();
 			bExpenseOnTripBilled.setRowID("Billed Expense Report" + i);
 			abilledExpense.add(bExpenseOnTripBilled);
 		}
@@ -201,16 +205,16 @@ public class TripRegistrationController implements Serializable {
 		if (event.getObject() instanceof FuelDto) {
 			processDoneOnFuelTable((FuelDto) event.getObject());
 			msg = new FacesMessage("Fuel Edited", ((FuelDto) event.getObject()).getRowID());
-		} else if (event.getObject() instanceof ExpenseOnTripBilled) {
-			this.processDoneOnBilledExpenseTable((ExpenseOnTripBilled) event.getObject());
-			msg = new FacesMessage("Expense Edited", ((ExpenseOnTripBilled) event.getObject()).getRowID());
-		} else if (event.getObject() instanceof ExpenseonRTOandTOLL) {
-			this.processDoneOnExpenseonRTOandToll((ExpenseonRTOandTOLL) event.getObject());
-			int listmaxSize=Integer.valueOf(((ExpenseonRTOandTOLL) event.getObject()).getRowID());
+		} else if (event.getObject() instanceof ExpenseOnTripBilledDto) {
+			this.processDoneOnBilledExpenseTable((ExpenseOnTripBilledDto) event.getObject());
+			msg = new FacesMessage("Expense Edited", ((ExpenseOnTripBilledDto) event.getObject()).getRowID());
+		} else if (event.getObject() instanceof ExpenseonRTOandTOLLDto) {
+			this.processDoneOnExpenseonRTOandToll((ExpenseonRTOandTOLLDto) event.getObject());
+			int listmaxSize=Integer.valueOf(((ExpenseonRTOandTOLLDto) event.getObject()).getRowID());
 			if(this.getExpenseonRTOandTOLL().size()==listmaxSize+1) {
 				this.setExpenseonRTOandTOLL(FillBilledExpese(this.getExpenseonRTOandTOLL()));
 			}
-			msg = new FacesMessage("Expense Edited", ((ExpenseonRTOandTOLL) event.getObject()).getRowID());
+			msg = new FacesMessage("Expense Edited", ((ExpenseonRTOandTOLLDto) event.getObject()).getRowID());
 		}
 		this.getTripRegisterDto().setTotalExpenseForTrip(new BigDecimal(0));
 		this.getTripRegisterDto().setTotalIncome(new BigDecimal(0));
@@ -223,11 +227,11 @@ public class TripRegistrationController implements Serializable {
 		RequestContext.getCurrentInstance().update("tripRegister:ExpenseOnRTOandToll");
 	}
 
-	private List<ExpenseonRTOandTOLL> FillBilledExpese(List<ExpenseonRTOandTOLL> pExpenseonRTOandTOLL) {
-		List<ExpenseonRTOandTOLL> cExpenseonRTOandTOLL = new ArrayList<>(5);
+	private List<ExpenseonRTOandTOLLDto> FillBilledExpese(List<ExpenseonRTOandTOLLDto> pExpenseonRTOandTOLL) {
+		List<ExpenseonRTOandTOLLDto> cExpenseonRTOandTOLL = new ArrayList<>(5);
 		int size=pExpenseonRTOandTOLL.size();
 		for (int i =size ; i <= size+4; i++) {
-			ExpenseonRTOandTOLL bExpenseonRTOandTOLL = new ExpenseonRTOandTOLL();
+			ExpenseonRTOandTOLLDto bExpenseonRTOandTOLL = new ExpenseonRTOandTOLLDto();
 			bExpenseonRTOandTOLL.setRowID(String.valueOf(i));
 			cExpenseonRTOandTOLL.add(bExpenseonRTOandTOLL);
 		}
@@ -236,10 +240,10 @@ public class TripRegistrationController implements Serializable {
 	}
 	
 	
-	private void processDoneOnExpenseonRTOandToll(ExpenseonRTOandTOLL pExpenseonRTOandTOLL) {
+	private void processDoneOnExpenseonRTOandToll(ExpenseonRTOandTOLLDto pExpenseonRTOandTOLL) {
 		BigDecimal totalTollAmount = new BigDecimal(0);
 		BigDecimal totalRTOExpense = new BigDecimal(0);
-		for (ExpenseonRTOandTOLL aExpenseonRTOandTOLL : this.getExpenseonRTOandTOLL()) {
+		for (ExpenseonRTOandTOLLDto aExpenseonRTOandTOLL : this.getExpenseonRTOandTOLL()) {
 			if (Constants.RTO.equals(aExpenseonRTOandTOLL.getExpenseType())
 					&& aExpenseonRTOandTOLL.getAmountOfExpense() != null) {
 				totalRTOExpense = totalRTOExpense.add(aExpenseonRTOandTOLL.getAmountOfExpense());
@@ -253,9 +257,9 @@ public class TripRegistrationController implements Serializable {
 		this.getTripRegisterDto().setTotalTollExpense(totalTollAmount);
 	}
 
-	private void processDoneOnBilledExpenseTable(ExpenseOnTripBilled pExpenseOnTripBilled) {
+	private void processDoneOnBilledExpenseTable(ExpenseOnTripBilledDto pExpenseOnTripBilled) {
 		BigDecimal totalAmountBilled = new BigDecimal(0);
-		for (ExpenseOnTripBilled aExpenseOnTripBilled : this.getBilledExpense()) {
+		for (ExpenseOnTripBilledDto aExpenseOnTripBilled : this.getBilledExpense()) {
 			if (aExpenseOnTripBilled.getAmountpaid() != null) {
 				totalAmountBilled = totalAmountBilled.add(aExpenseOnTripBilled.getAmountpaid());
 			}
@@ -297,16 +301,16 @@ public class TripRegistrationController implements Serializable {
 				this.getFuelDtoForTable().add(a);
 			}
 			msg = new FacesMessage("Fuel Edited", ((FuelDto) event.getObject()).getRowID());
-		} else if (event.getObject() instanceof ExpenseOnTripBilled) {
-			if (this.getBilledExpense().remove((ExpenseOnTripBilled) event.getObject())) {
-				this.getBilledExpense().add(new ExpenseOnTripBilled());
+		} else if (event.getObject() instanceof ExpenseOnTripBilledDto) {
+			if (this.getBilledExpense().remove((ExpenseOnTripBilledDto) event.getObject())) {
+				this.getBilledExpense().add(new ExpenseOnTripBilledDto());
 			}
-			msg = new FacesMessage("Expense Edited", ((ExpenseOnTripBilled) event.getObject()).getRowID());
-		} else if (event.getObject() instanceof ExpenseonRTOandTOLL) {
-			if (this.getExpenseonRTOandTOLL().remove((ExpenseonRTOandTOLL) event.getObject())) {
-				this.getExpenseonRTOandTOLL().add(new ExpenseonRTOandTOLL());
+			msg = new FacesMessage("Expense Edited", ((ExpenseOnTripBilledDto) event.getObject()).getRowID());
+		} else if (event.getObject() instanceof ExpenseonRTOandTOLLDto) {
+			if (this.getExpenseonRTOandTOLL().remove((ExpenseonRTOandTOLLDto) event.getObject())) {
+				this.getExpenseonRTOandTOLL().add(new ExpenseonRTOandTOLLDto());
 			}
-			msg = new FacesMessage("Expense Edited", ((ExpenseonRTOandTOLL) event.getObject()).getRowID());
+			msg = new FacesMessage("Expense Edited", ((ExpenseonRTOandTOLLDto) event.getObject()).getRowID());
 		}
 		this.getTripRegisterDto().setTotalExpenseForTrip(new BigDecimal(0));
 		this.getTripRegisterDto().setTotalIncome(new BigDecimal(0));

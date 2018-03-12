@@ -1,10 +1,17 @@
-package com.LMS.DTO;
+package com.Logistic.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-public class TripRegisterDto {
+import com.LMS.DTO.ExpenseOnTripBilledDto;
+import com.LMS.DTO.ExpenseonRTOandTOLLDto;
+import com.LMS.DTO.FuelDto;
+
+
+
+public class TripRegister {
+
 
 private String vechileNumber;
 
@@ -320,4 +327,5 @@ public void setTotalprofitOnTrip(Integer totalprofitOnTrip) {
 
 
 	
+
 }
